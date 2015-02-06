@@ -1,3 +1,4 @@
+
 $("#formulario").validate({
     rules:
     {
@@ -15,24 +16,24 @@ $("#formulario").validate({
 		email: {
 				required: true,
 				email: true,
-				minlength: 4,
-				remote: "http://localhost/php/validar_email.php"
+				minlength: 4/*,
+				remote: "php/validar_email.php"*/
 		},
 		email2: {
 				required: true,
 				equalTo: email
 		},
-		conocer: {
-                allow_single_deselect: true
-        },
+		/*conocer: {
+                required: true
+        },*/
         usuario: {
                 required: true,
                 minlength : 4
         },
         password: {
                 required: true,
-                pass: true,
-                remote: "php/validar_password.php"
+                pass: true/*,
+                remote: "php/validar_password.php"*/
         },
         password2: {
                 required: true,
@@ -51,8 +52,7 @@ $("#formulario").validate({
         cp: {
                 required: true,
 				digits : true,
-				maxlength : 5,
-                remote: "http://localhost/php/validar_zip_db.php"
+				maxlength : 5
         },
         provincia: {
                 required: true
@@ -79,32 +79,14 @@ $("#formulario").validate({
                 var alerta=confirm("¡Envíado! Va a darse de alta como usuario. Se le pasará un cobro de 550 € ¿Desea continuar?");                
             }    
             if(alerta==true){
-                window.location.href = "bienvenida.html";
+/*cambiar!!!*/  window.location.href = "http://google.es";
             }
     }                    
 });
 
-// Cambia la provincia en funcion de los dos primeros digitos del codigo postal
-$("#cp").focusout(function(evento) {
-    $codigo=($("#cp").val()).substr(0, 2);
-    $("#provincia").val($codigo);
-});
-
 // Si cambia el texto en nombre de particular dinamicamente con nombre y apellidos
 $(document).ready(function(){
-    // Convierte en modo chosen el select de como nos conocio
-    $("#conocer").chosen({ 
-        allow_single_deselect: true,
-        no_results_text: "No existe resultado con "
-    });
-    // Convierte en modo chosen el select de forma pago
-    $("#pago").chosen({
-        allow_single_deselect: true,
-        no_results_text: "No existe resultado con "
-    });
-
-    // Funcion y sus llamadas para cambiar dinamicamente el nombre en caso de tener
-        // activado el checked de empresa y rellenarlo automaticamente
+    $("#conocer").chosen();
     function actualizaNombreApellidos(){
         if ($("#demandanteparticular").is(':checked')) {
             $("#particularempresa").val($("#nombre").val()+" "+$("#apellidos").val());
@@ -112,34 +94,6 @@ $(document).ready(function(){
     }
     $(document).on("change, keyup", "#nombre", actualizaNombreApellidos);
     $(document).on("change, keyup", "#apellidos", actualizaNombreApellidos);
-
-
-// Bloque para cambiar
-    // Pone un option value inicial en localidad
-    $("#localidad").html("<option value=''>Seleccione una localidad...</option>");
-
-    // Cambia dinamicamente al cambiar el valor de provincia
-    $("#cp").change(function() {
-        // Cambia la opcion a Cargando mientras se prepara para buscar en php
-        $("#localidad").html("<option value=''>Cargando...</option>");
-
-        // Si no encontro localidad (es un error pero lo manejo), Vuelve a mostrar seleccione una localidad
-        if ($(this).val() == "") {
-            $("#localidad").html("<option value=''>Seleccione una localidad...</option>");
-        }else{
-            // Hace una peticion ajax usando el valor seleccionado (value) como parametro GET
-            $.ajax({
-                url: 'http://localhost/php/rellenar_municipios_db.php?cp='+$(this).val(),
-                // Si todo va bien muestra la salida (previamente formateada en php) en localidad
-                success: function(output) {
-                    $("#localidad").html(output);
-                },
-                // Si no va bien muestra el error
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + " "+ thrownError);
-                }});
-            }
-        });
 });
 
 
