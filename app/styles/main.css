@@ -14,23 +14,28 @@ input:focus{
 }
 
 fieldset{
+    width: 650px;
     border: 1px solid #0076ff;
     margin-top: 10px;
 }
 
 label{
     display: inline-block;
-
-    width: 25%;
+    width: 35%;
     text-align: right;
 }
 
 input{
     margin: 2px;
-    
-
 }
 
+.error{
+  background:#fafafa;
+  font-family: 'Patrick Hand', cursive;
+  color:red
+}
+
+/*Enlace a repositorio github*/
 
 .hero-unit {
   margin: 50px auto 0 auto;
@@ -56,7 +61,7 @@ input{
   padding: 0.2em 0;
 }
 
-
+/*Botón enviar*/
 input#enviar{
   margin-top: 10px;
   cursor:pointer; 
