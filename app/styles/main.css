@@ -32,7 +32,9 @@ input{
 .error{
   background:#fafafa;
   font-family: 'Patrick Hand', cursive;
-  color:red
+  color:red;
+  text-align: left;
+  margin-left: 10px
 }
 
 /*Enlace a repositorio github*/

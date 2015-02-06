@@ -2,9 +2,10 @@
 /* Descomentaríamos la siguiente línea para mostrar errores de php en el fichero: */
 // ini_set('display_errors', '1');
 /* Definimos los parámetros de conexión con la bbdd: */
-$dbinfo = "mysql:dbname=xxxx;host=localhost";
-$user = "yyyyy";
-$pass = "zzzzz";
+$dbinfo = "mysql:dbname=albapardos_practica_validacion;host=localhost";
+$user = "albapardos_root";
+$pass = "rooter";
+
 //Nos intentamos conectar:
 try {
     /* conectamos con bbdd e inicializamos conexión como UTF8 */
