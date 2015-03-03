@@ -32,7 +32,6 @@ $("#formulario").validate({
         password: {
                 required: true,
                 pass: true,
-                remote: "php/validar_password.php"
         },
         password2: {
                 required: true,
@@ -40,7 +39,8 @@ $("#formulario").validate({
         },
         nifcif:{
                 required: true,
-                validanifcif: true
+                validanifcif: true, 
+                remote: "http://localhost/php/validar_nif_db.php"
         },
         particularempresa:{
                 required: true
@@ -68,20 +68,29 @@ $("#formulario").validate({
             required: true
         }
     },   
-    submitHandler : function() {
-            if(parseInt($("#pago").val())==1){
-                var alerta=confirm("¡Envíado! Va a darse de alta como usuario. Se le pasará un cobro de 50 € ¿Desea continuar?");
+    //cuando envie el formulario confirmará el pago y dará posibilidad de cancelar
+     submitHandler: function () {
+            var pago;
+            if ($("#modo_pago_0").is(':checked')) {
+                pago="mensual será de 50€";
             }
-            if(parseInt($("#pago").val())==2){
-                var alerta=confirm("¡Envíado! Va a darse de alta como usuario. Se le pasará un cobro de 140 € ¿Desea continuar?");
+            if ($("#modo_pago_1").is(':checked')) {
+                pago="trimestral será de 140€";
             }
-            if(parseInt($("#pago").val())==3){
-                var alerta=confirm("¡Envíado! Va a darse de alta como usuario. Se le pasará un cobro de 550 € ¿Desea continuar?");                
-            }    
+            if ($("#modo_pago_2").is(':checked')) {
+                pago="anual será de 550€";
+            }
+
+
+            var alerta=confirm('Va a ser dado de alta y su próxima cuota de tipo '+pago+' ¿Desea continuar?');
             if(alerta==true){
-                window.location.href = "bienvenida.html";
+                alert("Ha sido dado de alta corectamente");
+                window.location.href = "index.html";
+            }else{
+                alert("Ha cancelado la operación");
+                window.location.href = "index.html";
             }
-    }                    
+        }                   
 });
 
 // Cambia la provincia en funcion de los dos primeros digitos del codigo postal
@@ -161,43 +170,7 @@ $("#demandanteempresa").change(function(evento) {
         $("#particularempresa").val(""); 
     }
 });
-/*$("#demandanteparticular").change(function(evento) {
-    if ($("#demandanteparticular").is(':checked')) {
-        $("#lblcif > span").removeClass("important");
-        $("#lblcif > span").text("");
-        $("#cif").attr('disabled', true);
-        $("#lblempresa > span").removeClass("important");
-        $("#lblempresa > span").text("");
-        $("#empresa").attr('disabled', true);
 
-        $("#lblnif > span").addClass("important");
-        $("#lblnif > span").text("*");
-        $("#nif").removeAttr('disabled');
-        $("#lblparticular > span").addClass("important");
-        $("#lblparticular > span").text("*");
-        $("#particular").removeAttr('disabled');        
-    }
-});*/
-
-// Si el input:radio #demandanteempresa esta marcado: 
-/*$("#demandanteempresa").change(function(evento) {
-    if ($("#demandanteempresa").is(':checked')) {
-        $("#lblnif > span").removeClass("important");
-        $("#lblnif > span").text("");
-        $("#nif").attr('disabled', true);
-        $("#lblparticular > span").removeClass("important");
-        $("#lblparticular > span").text("");
-        $("#particular").attr('disabled', true);
-
-        $("#lblcif > span").addClass("important");
-        $("#lblcif > span").text("*");
-        $("#cif").removeAttr('disabled');
-        $("#lblempresa > span").addClass("important");
-        $("#lblempresa > span").text("*");
-        $("#empresa").removeAttr('disabled');
-        
-    }
-});*/
 
 // Si el Código Postal tiene menos de 4 dígitos, se agrega un 0 a la izquierda.
 $("#cp").focusout(function() {
@@ -227,23 +200,6 @@ $.validator.addMethod("validaTarjeta", function(value, element) {
     return this.optional(element) ||  /^[0-9]+$/.test(value);
 }, "Por favor eliga un tipo de tarjeta de credito.");
 
- //Validación del Código Postal mediante Ajax
-/*$("#cp").change(function(){
-	if($(this).val()!=""){
-        var dato=$(this).val();
-        $.ajax({
-            type:"POST",
-            dataType:"html",
-            url:"php/validar_zip_db.php",
-            data:"cp="+dato,
-            success:function(msg){
-            	alert(msg);
-                $("#provincia").val(msg);
-            }
-        });
-    }			
-});*/
- 	
 
 
 
