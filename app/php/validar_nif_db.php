@@ -38,4 +38,4 @@ if (isset($_REQUEST['cifnif'])) {
 echo $valid;
 $sql=null;
 $db = null;
-?>
+?>º                         

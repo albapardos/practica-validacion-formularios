@@ -6,45 +6,43 @@ $dbinfo = "mysql:dbname=albapardos_practica_validacion;host=localhost";
 $user = "albapardos_root";
 $pass = "rooter";
 
-//Nos intentamos conectar:
+// Intentamos conectar
 try {
-    /* conectamos con bbdd e inicializamos conexión como UTF8 */
+    // Conectamos a la BBDD 
     $db = new PDO($dbinfo, $user, $pass);
+    // Inicializamos la conexion como utf8 para que coja correctamente caracteres españoles como la ñ
     $db->exec('SET CHARACTER SET utf8');
 } catch (Exception $e) {
     echo "La conexi&oacute;n ha fallado: " . $e->getMessage();
 }
-/* Para hacer debug cargaríamos a mano el parámetro, descomentaríamos la siguiente línea: */
-//$_REQUEST['email'] = "pepito@hotmail.com";
+// Si hemos recibido una variable CP
 if (isset($_REQUEST['cp'])) {
-    /* La línea siguiente la podemos descomentar para ver desde firebug-xhr si se pasa bien el parámetro desde el formulario */
-    //echo $_REQUEST['email'];
+    // Si su longuitud es mayor o igual a 2, cogemos los 2 primeros caracteres en la variable cp
     if (strlen($_REQUEST['cp']) >= 2){
         $cp = substr($_REQUEST['cp'], 0, 2);
     } else {
+    // Sino asignamos directamente el valor a la variable cp        
         $cp = $_REQUEST['cp'];
     }
-    $sql = $db->prepare("SELECT Provincia FROM t_provincias WHERE CodProv=?");
+    // Preparamos y lanzamos la consulta   
+    $sql = $db->prepare("SELECT t_provincias FROM provincias WHERE CodProv=?");
+    //$resultado->execute($cp);
     $sql->bindParam(1, $cp, PDO::PARAM_STR);
     $sql->execute();
-    /* Ojo... PDOStatement::rowCount() devuelve el número de filas afectadas por la última sentencia DELETE, INSERT, o UPDATE 
-     * ejecutada por el correspondiente objeto PDOStatement.Si la última sentencia SQL ejecutada por el objeto PDOStatement 
-     * asociado fue una sentencia SELECT, algunas bases de datos podrían devolver el número de filas devuelto por dicha sentencia. 
-     * Sin embargo, este comportamiento no está garantizado para todas las bases de datos y no debería confiarse en él para 
-     * aplicaciones portables.
-     */
-    $valid = 'true';
+    // Declaramos una variable para almacer si todo fue bien o no, y lo comprobamos asignado
+    $valid;
     if ($sql->rowCount() > 0) {
-        $valid= 'false';
+        $valid= 'true';
     } else {
-       $valid='true';
+       $valid='false';
     }
-}
-    $okey = $sql->fetch();    
+    // Recorremos la consulta
+    $okey = $sql->fetch();       
     
-    
-}
+    //Devolvemos el resultado de la provincia con ese CP
+    echo $valid;
+// Liberamos recursos (BBDD y consulta)
 $sql=null;
-$db = null;
-echo $okey[0];
+$db=null;
+}
 ?>
