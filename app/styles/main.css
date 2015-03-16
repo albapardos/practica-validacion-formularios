@@ -1,40 +1,182 @@
+
 body {
-  background: #fafafa;
+      background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
+} 
+
+
+
+
+
+.wrap {
+    background: none repeat scroll 0 0 #008DFF;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    display: block;
+    margin: 20px auto;
+    padding: 15px 15px 15px 40px;
+    width: 600px;
+    transition: 2s all;
 }
 
-.important{
-  color: red;
-  font-size: bold;
+.required:after {
+    color: red;
+    content: "*";
+    margin-left: 10px;
+}
+
+
+
+
+h3 {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 15px;
+    text-align: center;
+}
+
+input {
+    display: block;
 }
 
 input:focus{
    background: rgba(0, 118, 255, 0.35);
 }
 
-fieldset{
-    width: 650px;
-    border: 1px solid #0076ff;
-    margin-top: 10px;
+.passinfo {
+    font-size: 14px;
+    margin-right: 10px;
 }
 
-label{
+#success {
+    text-align: center;
+}
+
+input, select {
+    border: medium none;
+    color: #333;
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    width: 90%;
     display: inline-block;
-    width: 35%;
-    text-align: right;
+    border-radius: 10px;
+    text-transform: uppercase;
 }
 
-input{
-    margin: 2px;
+.center {
+    text-align: center;
 }
 
-.error{
-  background:#fafafa;
-  font-family: 'Patrick Hand', cursive;
-  color:red;
-  text-align: left;
-  margin-left: 10px
+
+
+
+.wrap label {
+    background: none repeat scroll 0 0 #f28080;
+    border-top: 4px solid #db3636;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px;
+    position: relative;
+    top: -24px;
+    width: 90%;
+    color: #333;
+    border-radius: 0 0 10px 10px;
+}
+
+.radius{
+background: none repeat scroll 0 0 #008DFF;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    display: block;
+    margin: 20px auto;
+    padding: 15px 15px 15px 40px;
+    width: 600px;
+    transition: 2s all;
+
+}
+
+.withmargin {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 960px) {
+
+
+body {
+    
+    font-size: 14px;
+}
+
+   
+    h3 {
+        font-size: 20px;
+        
+    }
+
+   
+
+    .wrap {
+        background: none repeat scroll 0 0 #0062FF;
+        border: 1px solid #0046B6;
+        border-radius: 10px;
+        display: block;
+        margin: 20px auto;
+        padding: 15px;
+        transition: none 0s ease 0s ;
+        width: auto;
+    }
+
+
+    input, select {
+        border: medium none;
+        border-radius: 10px;
+        color: #333;
+        display: inline-block;
+        font-size: 14px;
+        margin: 10px 0;
+        padding: 10px;
+        width: 80%;
+    }
+
+    #refered {
+        width: 100%;
+    }
+
+
+.wrap label {
+    background: none repeat scroll 0 0 #0062FF;
+    border-radius: 0 0 10px 10px;
+    border-top: 4px solid #db3636;
+    color: #333;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px;
+    position: relative;
+    top: -15px;
+    width: 80%;
+}
+
+
+.switch-toggle input {
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+}
+
+.radius {
+ background: none repeat scroll 0 0 #eee;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        display: block;
+        margin: 20px auto;
+        padding: 15px;
+        transition: none 0s ease 0s ;
+        width: auto;
+}
+    
 }
 
 /*Enlace a repositorio github*/
@@ -61,29 +203,4 @@ input{
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
-}
-
-/*Botón enviar*/
-input#enviar{
-  margin-top: 10px;
-  cursor:pointer; 
-  padding:5px 25px; 
-  background:#35b128;
-  border:1px solid #33842a;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
-  -moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
-  box-shadow: 0 0 4px rgba(0,0,0, .75);
-  color:#f3f3f3;
-  font-size:1.1em;
-}
-
-
-input#enviar:hover, input#enviar:focus{
-background-color :#399630; 
--webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
--moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
-box-shadow: 0 0 1px rgba(0,0,0, .75);
 }

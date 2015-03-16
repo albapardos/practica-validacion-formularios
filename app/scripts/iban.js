@@ -119,4 +119,4 @@ $.validator.addMethod("iban", function(value, element) {
         cRest = cOperator % 97;
     }
     return cRest === 1;
-}, "Por favor, escribe una IBAN válido.");
+}, "Porfavor introduce un IBAN valido");
